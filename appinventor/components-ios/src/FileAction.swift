@@ -1,24 +1,21 @@
 //
-//  FileType.swift
-//  AIComponentKit
+//  FileAction.swift
+//
 //
 //  Created by Jonathan Tjandra on 5/14/24.
-//  Copyright © 2024 Massachusetts Institute of Technology. All rights reserved.
 //
 
 import Foundation
 
-@objc public class FileType: NSObject, OptionList {
-    @objc public static let All = FileType("*/*")
-    @objc public static let Audio = FileType("audio/*")
-    @objc public static let Image = FileType("image/*")
-    @objc public static let Video = FileType("video/*")
+@objc public class FileAction: NSObject, OptionList {
+    @objc public static let PickExistingFile = FileAction("Pick Existing File")
+    @objc public static let PickNewFile = FileAction("Pick New File")
+    @objc public static let PickDirectory = FileAction("Pick Directory")
     
-    private static let LOOKUP: [String:FileType] = [
-        "*/*": FileType.All,
-        "audio/*": FileType.Audio,
-        "image/*": FileType.Image,
-        "video/*": FileType.Video
+    private static let LOOKUP: [String:FileAction] = [
+        "Pick Existing File": FileAction.PickExistingFile,
+        "Pick New File": FileAction.PickNewFile,
+        "Pick Directory": FileAction.PickDirectory
         
     ]
     
@@ -28,7 +25,7 @@ import Foundation
         self.label = label
       }
 
-      @objc class func fromUnderlyingValue(_ scope: String) -> FileType? {
+      @objc class func fromUnderlyingValue(_ scope: String) -> FileAction? {
         return LOOKUP[scope]
       }
 
